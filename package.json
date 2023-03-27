@@ -14,9 +14,13 @@
   "dependencies": {
     "@types/express": "^4.17.17",
     "@types/graphql": "^14.5.0",
+    "@types/node": "^18.15.10",
     "apollo-server-express": "^3.10.3",
     "express": "^4.18.2",
-    "graphql": "^16.6.0"
+    "graphql": "^16.6.0",
+    "pg": "^8.10.0",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.3.12"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^3.2.2",
