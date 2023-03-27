@@ -14,14 +14,19 @@ input SignupInput {
 }
 
 type AuthResponse {
-    user: User
-    jwt: String
+    user: User!
+    jwt: String!
 }
 
 type Mutation {
     signup (input: SignupInput!): AuthResponse!
 }
 
+type Query {
+    get: String
+}
+
 schema {
     mutation: Mutation
+    query: Query
 }
