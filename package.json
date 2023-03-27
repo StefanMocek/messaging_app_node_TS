@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "generate": "echo \"Error: no test specified\" && exit 1"
+    "generate": "graphql-codegen --config codegen.yml"
   },
   "author": "",
   "license": "ISC",
