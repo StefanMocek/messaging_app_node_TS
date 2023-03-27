@@ -1,4 +1,5 @@
 import { appModule } from "./module";
+import 'reflect-metadata';
 
 const bootstrap = async () => {
     const {httpServer, server} = await appModule.startApollo();
