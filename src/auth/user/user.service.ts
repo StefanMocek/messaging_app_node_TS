@@ -12,6 +12,10 @@ export class UserService {
         const user = this.userRepository.create({...signupInput, password});
         
         return await this.userRepository.save(user);
+    };
+
+    async findOneByEmail(email:string) {
+        return await this.userRepository.findOneBy({email})
     }
 };
 
