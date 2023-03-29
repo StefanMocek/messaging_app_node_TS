@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken';
 import { ApolloServer, ExpressContext } from "apollo-server-express";
 import { JwtPayload, Resolvers } from './__generated__/resolvers-types';
 import { authResolvers } from './auth/auth.resolvers';
+import { AppDataSource } from './app-data.source';
 
 export interface MyContext extends ExpressContext {
     currentUser: JwtPayload;
@@ -15,6 +16,8 @@ export class AppModule {
     constructor(public resolvers: Resolvers) { }
 
     async startApollo(): Promise<{ httpServer: http.Server, server: ApolloServer<MyContext> }> {
+        await AppDataSource.initialize()
+
         const typeDefs = readFileSync('schema.graphql', { encoding: 'utf-8' });
 
         const app = express();
@@ -25,18 +28,15 @@ export class AppModule {
             resolvers: this.resolvers,
             typeDefs,
             context: ({ req, res }) => {
-                if (!req.headers.authorization) {
-                    return {
-                        currentuser: null,
-                        req,
-                        authorized: false
-                    }
+                let payload;
+                try {
+                    payload = jwt.verify(
+                        req.headers.authorization || '',
+                        process.env.JWT_KEY!,
+                    )
+                } catch (err) {
+                    payload = null
                 }
-
-                const payload = jwt.verify(
-                    req.headers.authorization,
-                    process.env.JWT_KEY!,
-                )
                 return {
                     currentUser: payload,
                     req,
