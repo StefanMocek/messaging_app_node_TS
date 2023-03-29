@@ -22,13 +22,18 @@ type AuthResponse {
     jwt: String!
 }
 
+type JwtPayload {
+    email: String!
+    userId: Int!
+}
+
 type Mutation {
     signup (input: SignupInput!): AuthResponse!
     signin (input: SigninInput!): AuthResponse!
 }
 
 type Query {
-    get: String
+    currentuser: JwtPayload
 }
 
 schema {
