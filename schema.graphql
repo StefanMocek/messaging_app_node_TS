@@ -1,7 +1,6 @@
 type User {
     id: Int!
     email: String!
-    password: String
     firstName: String!
     lastName: String!
 }
@@ -13,6 +12,11 @@ input SignupInput {
     lastName: String!
 }
 
+input SigninInput {
+    email: String!
+    password: String!
+}
+
 type AuthResponse {
     user: User!
     jwt: String!
@@ -20,6 +24,7 @@ type AuthResponse {
 
 type Mutation {
     signup (input: SignupInput!): AuthResponse!
+    signin (input: SigninInput!): AuthResponse!
 }
 
 type Query {
