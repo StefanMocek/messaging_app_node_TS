@@ -57,7 +57,7 @@ export const authResolvers: Resolvers = {
             if(!context.authorized) {
                 throw new GraphQLError(
                     'not authorized',
-                    {extensions: {code: 'UNAUTHORIZED'}}    
+                    {extensions: {code: 'FORBIDDEN'}}    
                 )
             }
 
