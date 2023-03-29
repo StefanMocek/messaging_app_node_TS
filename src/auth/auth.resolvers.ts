@@ -53,6 +53,15 @@ export const authResolvers: Resolvers = {
     },
 
     Query: {
-        get: () => 'Ok'
+        currentUser(parent, {}, context){
+            if(!context.authorized) {
+                throw new GraphQLError(
+                    'not authorized',
+                    {extensions: {code: 'UNAUTHORIZED'}}    
+                )
+            }
+
+            return context.currentUser
+        }
     }
 }
