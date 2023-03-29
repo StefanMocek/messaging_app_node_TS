@@ -1,3 +1,5 @@
+import * as dotenv from 'dotenv'
+dotenv.config()
 import { appModule } from "./module";
 import 'reflect-metadata';
 
