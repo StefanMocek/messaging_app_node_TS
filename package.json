@@ -5,9 +5,11 @@
   "main": "index.js",
   "scripts": {
     "generate": "graphql-codegen --config codegen.yml",
-    "compile": "tsc ",
-    "start": "npm run compile && node --watch ./dist/src/main.js",
-    "lt": "npx localtunnel -p 4000"
+    "build": "tsc",
+    "start": "npm run build && node ./dist/src/main.js",
+    "lt": "npx localtunnel -p 4000",
+    "build-local": "tsc && node ./dist/src/main.js",
+    "start-local": "nodemon -e  ts --exec \"npm run build-local\""
   },
   "author": "",
   "license": "ISC",
@@ -31,6 +33,7 @@
     "@graphql-codegen/typescript": "^3.0.2",
     "@graphql-codegen/typescript-resolvers": "^3.1.1",
     "localtunnel": "^2.0.2",
+    "nodemon": "^2.0.22",
     "typescript": "^5.0.2"
   }
 }
