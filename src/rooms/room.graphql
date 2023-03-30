@@ -1,0 +1,23 @@
+type Message {
+    from: Int!
+    content: String!
+}
+
+type Room {
+    id: Int!
+    user: [User]
+    messages: [Message]
+}
+
+input SendMeesageInput {
+    message: String!
+    roomId: Int!
+}
+
+type Mutation {
+    sendMsg (input: SendMeesageInput): Room
+}
+
+type Query {
+    currentUser: JwtPayload
+}
