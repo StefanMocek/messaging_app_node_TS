@@ -32,7 +32,7 @@ type JwtPayload {
 type Mutation {
   signup(input: SignupInput!): AuthResponse!
   signin(input: SigninInput!): AuthResponse!
-  sendMsg(input: SendMeesageInput): Room
+  sendMsg(input: SendMeesageInput!): Room
 }
 
 type Query {
