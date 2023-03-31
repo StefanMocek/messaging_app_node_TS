@@ -15,7 +15,7 @@ input SendMeesageInput {
 }
 
 type Mutation {
-    sendMsg (input: SendMeesageInput): Room
+    sendMsg (input: SendMeesageInput!): Room
 }
 
 type Query {
