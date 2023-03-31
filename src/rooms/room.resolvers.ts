@@ -17,6 +17,5 @@ export const roomResolvers: Resolvers = {
                 messages: [{from: 1, content: input.message}]
             }
         }
-        }
     }
 }
