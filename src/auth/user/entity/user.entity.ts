@@ -1,4 +1,3 @@
-import { Room } from "../../../rooms/room/entity/room.entity";
 import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from "typeorm";
 
 @Entity()
@@ -17,8 +16,4 @@ export class User {
 
     @Column()
     password:string
-
-    @ManyToMany(() => Room, (room) => room.users)
-    @Column()
-    rooms: Room[]
 }
