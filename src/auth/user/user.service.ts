@@ -1,11 +1,11 @@
 import { Repository } from "typeorm";
 import bcrypt from 'bcrypt';
 import { User } from "./entity/user.entity";
-import { SignupInput } from '../../__generated__/resolvers-types'
-import { AppDataSource } from '../../app-data.source'
+import { SignupInput } from '../../__generated__/resolvers-types';
+import { AppDataSource } from '../../app-data.source';
 
 export class UserService {
-    constructor(public userRepository: Repository<User>) { }
+    constructor(public userRepository: Repository<User>) { };
 
     async create(signupInput: SignupInput) {
         const password = await bcrypt.hash(signupInput.password, 10);
@@ -21,10 +21,10 @@ export class UserService {
             .select('user')
             .addSelect('user.password')
             .where('email = :email', { email })
-            .getOne()
+            .getOne();
 
-        return user
-    }
+        return user;
+    };
 };
 
-export const userService = new UserService(AppDataSource.getRepository(User))
+export const userService = new UserService(AppDataSource.getRepository(User));
