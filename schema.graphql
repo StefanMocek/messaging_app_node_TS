@@ -33,6 +33,7 @@ type Mutation {
   signup(input: SignupInput!): AuthResponse!
   signin(input: SigninInput!): AuthResponse!
   sendMsg(input: SendMeesageInput!): Room
+  createRoom(input: CreateRoomInput!): Room
 }
 
 type Query {
@@ -53,6 +54,11 @@ type Room {
 input SendMeesageInput {
   message: String!
   roomId: Int!
+}
+
+input CreateRoomInput {
+  message: String!
+  reciver: Int!
 }
 
 schema {
