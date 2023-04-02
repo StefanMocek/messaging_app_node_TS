@@ -14,10 +14,12 @@ input SendMeesageInput {
     roomId: Int!
 }
 
-type Mutation {
-    sendMsg (input: SendMeesageInput!): Room
+input CreateRoomInput {
+     message: String!
+     reciver: Int!   
 }
 
-type Query {
-    currentUser: JwtPayload
+type Mutation {
+    sendMsg (input: SendMeesageInput!): Room
+    createRoom(input: CreateRoomInput!): Room
 }
