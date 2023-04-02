@@ -29,6 +29,17 @@ export class RoomService {
 
         return await this.roomRepository.save(room);
     };
+
+    async findRoomWithUsersId(reciverId: number, senderId: number) {
+        const queryBuilder = this.roomRepository.createQueryBuilder('room');
+        const rooms = await queryBuilder
+            .select()
+            .innerJoin('room.users', 'u')
+            .where('"u"."id" = :senderId', {senderId})
+            .getMany()
+
+        return !!rooms?.some(room => room.users.some(u => u.id === reciverId))
+    }
 };
 
 export const roomService = new RoomService(AppDataSource.getRepository(Room));
