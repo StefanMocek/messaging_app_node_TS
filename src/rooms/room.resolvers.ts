@@ -17,7 +17,7 @@ export const roomResolvers: Resolvers = {
             return await roomService.addMessageToRoom(input.roomId, {
                 content: input.message,
                 from: context.currentUser.userId
-            })
+            }, context.io)
         },
 
         async createRoom(parent, { input }, context) {
