@@ -9,5 +9,5 @@ export const AppDataSource = new DataSource({
     database: 'main',
     entities: ['/dist/**/*.entity.js'],
     logging: false,
-    synchronize: true
+    synchronize: false
 })
