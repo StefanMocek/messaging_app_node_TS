@@ -10,7 +10,8 @@
     "lt": "npx localtunnel -p 4000",
     "build-local": "tsc && node ./dist/src/main.js",
     "start-local": "nodemon -e  ts --exec \"npm run build-local\"",
-    "docker-dev": "docker run -ti --name app_pg -p 5455:5432 -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=admin -e POSTGRES_DB=main postgres"
+    "docker-dev": "docker run -ti --name app_pg -p 5455:5432 -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=admin -e POSTGRES_DB=main postgres",
+    "migrate-db":"npx typeorm-ts-node-commonjs migration-generate ./src/migrations/migration -d ./src/app-data-source.ts"
   },
   "author": "",
   "license": "ISC",
