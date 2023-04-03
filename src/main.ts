@@ -1,5 +1,14 @@
-import { appModule } from "./module";
 import 'reflect-metadata';
+import { Socket } from 'socket.io';
+import { appModule } from "./module";
+
+declare global {
+    namespace Express {
+        interface Request {
+            socketIo?: Socket
+        }
+    }
+};
 
 const bootstrap = async () => {
     if(!process.env.JWT_KEY){
