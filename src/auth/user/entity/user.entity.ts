@@ -1,9 +1,10 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from "typeorm";
+import { IsEmail, MinLength } from 'class-validator';
 
 @Entity()
 export class User {
     @PrimaryGeneratedColumn()
-    id:number
+    id: number
 
     @Column()
     firstName: string
@@ -11,9 +12,11 @@ export class User {
     @Column()
     lastName: string
 
-    @Column({nullable: false, unique: true})
-    email:string
+    @Column({ nullable: false, unique: true })
+    @IsEmail()
+    email: string
 
     @Column()
-    password:string
+    @MinLength(6)
+    password: string
 }
