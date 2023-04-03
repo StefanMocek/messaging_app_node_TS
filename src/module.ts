@@ -13,7 +13,8 @@ import { Room } from './rooms/room/entity/room.entity';
 
 export interface MyContext extends ExpressContext {
     currentUser: JwtPayload;
-    authorized: boolean
+    authorized: boolean,
+    io: Server
 }
 
 export class AppModule {
@@ -58,6 +59,7 @@ export class AppModule {
 
                 return {
                     currentUser: payload,
+                    io,
                     req,
                     authorized: !!payload
                 };
