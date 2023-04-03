@@ -45,5 +45,18 @@ export const roomResolvers: Resolvers = {
                 content: input.message
             })
         }
+    },
+
+    Query: {
+        async getRooms(parent, {}, context) {
+            if (!context.authorized) {
+                throw new GraphQLError(
+                    'unauthorized',
+                    { extensions: { code: 'BAD_REQUEST' } }
+                )
+            };
+
+            return await roomService.getAllRooms(context.currentUser.userId)
+        }
     }
 }
