@@ -3,14 +3,14 @@
 type User {
   id: Int!
   email: String!
-  firstName: String!
+  name: String!
   lastName: String!
 }
 
 input SignupInput {
   email: String!
   password: String!
-  firstName: String!
+  name: String!
   lastName: String!
 }
 
