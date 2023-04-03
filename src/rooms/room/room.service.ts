@@ -1,4 +1,5 @@
 import { Repository } from "typeorm";
+import { Server } from 'socket.io';
 import { Room } from "./entity/room.entity";
 import { User } from "../../auth/user/entity/user.entity";
 import { Message } from "../../__generated__/resolvers-types";
@@ -17,13 +18,20 @@ export class RoomService {
             .getMany();
     };
 
-    async addMessageToRoom(roomId: number, message: Message) {
+    async addMessageToRoom(roomId: number, message: Message, io?: Server) {
         const queryBuilder = this.roomRepository.createQueryBuilder();
         await queryBuilder.update(Room, {
             messages: () => `messages || '${JSON.stringify(message)}'::jsonb`
         })
             .where('id = :id', { id: roomId })
             .execute();
+
+        if (io) {
+            io.to(`${roomId}`).emit('message', {
+                message,
+                roomId
+            })
+        }
 
         return await this.roomRepository.findOne(
             { where: { id: roomId }, relations: ['users'] }
