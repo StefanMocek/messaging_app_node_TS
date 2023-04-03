@@ -38,6 +38,7 @@ type Mutation {
 
 type Query {
   currentUser: JwtPayload
+  getRooms: [Room]
 }
 
 type Message {
