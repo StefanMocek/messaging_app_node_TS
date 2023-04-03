@@ -1,4 +1,4 @@
-import { Repository } from "typeorm";
+import { In, Repository } from "typeorm";
 import bcrypt from 'bcrypt';
 import { User } from "./entity/user.entity";
 import { SignupInput } from '../../__generated__/resolvers-types';
@@ -25,6 +25,10 @@ export class UserService {
 
         return user;
     };
+
+    async findByIds(ids: Array<number>){
+        return await this.userRepository.findBy({ id: In(ids)})
+    }
 };
 
 export const userService = new UserService(AppDataSource.getRepository(User));

@@ -23,3 +23,7 @@ type Mutation {
     sendMsg (input: SendMeesageInput!): Room
     createRoom(input: CreateRoomInput!): Room
 }
+
+type Query {
+    getRooms: [Room]
+}
