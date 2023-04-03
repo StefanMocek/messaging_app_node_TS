@@ -8,6 +8,15 @@ import { AppDataSource } from '../../app-data.source';
 export class RoomService {
     constructor(public roomRepository: Repository<Room>) { };
 
+    async getAllRooms(userId: number){
+        const queryBuilder = this.roomRepository.createQueryBuilder('room');
+
+        return await queryBuilder
+            .innerJoin('room.users', 'u')
+            .where('"u"."id" = :id', {id: userId})
+            .getMany();
+    };
+
     async addMessageToRoom(roomId: number, message: Message) {
         const queryBuilder = this.roomRepository.createQueryBuilder();
         await queryBuilder.update(Room, {
