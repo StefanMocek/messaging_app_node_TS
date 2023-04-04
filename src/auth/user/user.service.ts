@@ -13,17 +13,21 @@ export class UserService {
         const user = this.userRepository.create(signupInput);
 
         return await validateOrReject(user)
-            .then( async () => {
-            const password = await bcrypt.hash(signupInput.password, 10);
-            user.password = password;
-            
-            return await this.userRepository.save(user)})
+            .then(async () => {
+                const password = await bcrypt.hash(signupInput.password, 10);
+                user.password = password;
+
+                return await this.userRepository.save(user)
+            })
             .catch((errors: ValidationError[]) => {
                 throw new GraphQLError(
                     'wrong credentials',
-                    {extensions: {
-                        errors, 
-                        code: 'BAD_USER_INPUT'}}    
+                    {
+                        extensions: {
+                            errors,
+                            code: 'BAD_USER_INPUT'
+                        }
+                    }
                 )
             })
     };
@@ -40,8 +44,8 @@ export class UserService {
         return user;
     };
 
-    async findByIds(ids: Array<number>){
-        return await this.userRepository.findBy({ id: In(ids)})
+    async findByIds(ids: Array<number>) {
+        return await this.userRepository.findBy({ id: In(ids) })
     }
 };
 
