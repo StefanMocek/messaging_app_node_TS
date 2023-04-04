@@ -15,6 +15,8 @@ export class UserService {
         return await validateOrReject(user)
             .then( async () => {
             const password = await bcrypt.hash(signupInput.password, 10);
+            user.password = password;
+            
             return await this.userRepository.save(user)})
             .catch((errors: ValidationError[]) => {
                 throw new GraphQLError(
