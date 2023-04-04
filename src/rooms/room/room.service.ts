@@ -19,9 +19,8 @@ export class RoomService {
 
     async addMessageToRoom(roomId: number, message: Message) {
         const queryBuilder = this.roomRepository.createQueryBuilder();
-        await queryBuilder.update(Room, {
-            messages: () => `messages || '${JSON.stringify(message)}'::jsonb`
-        })
+        await queryBuilder.update(Room, 
+            {messages: () => `messages || '${JSON.stringify(message)}'::jsonb`})
             .where('id = :id', { id: roomId })
             .execute();
 
