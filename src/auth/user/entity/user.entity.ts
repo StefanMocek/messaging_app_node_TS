@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from "typeorm";
-import { IsEmail, MinLength } from 'class-validator';
+import { IsEmail, MinLength, IsStrongPassword } from 'class-validator';
 
 @Entity()
 export class User {
@@ -18,5 +18,6 @@ export class User {
 
     @Column()
     @MinLength(6)
+    @IsStrongPassword()
     password: string
 }
