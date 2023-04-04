@@ -9,12 +9,12 @@ import { AppDataSource } from '../../app-data.source';
 export class RoomService {
     constructor(public roomRepository: Repository<Room>) { };
 
-    async getAllRooms(userId: number){
+    async getAllRooms(userId: number) {
         const queryBuilder = this.roomRepository.createQueryBuilder('room');
 
         return await queryBuilder
             .innerJoin('room.users', 'u')
-            .where('"u"."id" = :id', {id: userId})
+            .where('"u"."id" = :id', { id: userId })
             .getMany();
     };
 
@@ -52,7 +52,7 @@ export class RoomService {
         const rooms = await queryBuilder
             .select()
             .innerJoin('room.users', 'u')
-            .where('"u"."id" = :senderId', {senderId})
+            .where('"u"."id" = :senderId', { senderId })
             .getMany()
 
         return !!rooms?.some(room => room.users.some(u => u.id === reciverId))

@@ -5,24 +5,24 @@ import { mergeTypeDefs } from '@graphql-tools/merge'
 import { print } from 'graphql'
 
 glob('src/**/*graphql', async (err: Error | null, files: string[]) => {
-    if(err) throw err;
+    if (err) throw err;
 
     let typesArray: Array<string> = []
 
     await unlink('schema.graphql')
     writeFileSync(
-        'schema.graphql', 
-        '# generated Schema - do not edit # \n\n', 
+        'schema.graphql',
+        '# generated Schema - do not edit # \n\n',
         { flag: 'a+' })
 
     files.forEach((filePath) => {
-        const schema = readFileSync(filePath, { encoding: 'utf-8' } )
+        const schema = readFileSync(filePath, { encoding: 'utf-8' })
         typesArray.push(schema)
     })
 
     const typeDefs = print(mergeTypeDefs(typesArray))
     appendFile('schema.graphql', typeDefs, function (err) {
-        if(err) throw err;
+        if (err) throw err;
     })
 
     console.info('Graphql schema generated')

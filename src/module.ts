@@ -22,7 +22,7 @@ export class AppModule {
 
     async startApollo(): Promise<{ httpServer: http.Server, server: ApolloServer<MyContext> }> {
         const typeDefs = readFileSync('schema.graphql', { encoding: 'utf-8' });
-        
+
         const appDataSoure = await AppDataSource.initialize()
         const app = express();
         const httpServer = http.createServer(app);
@@ -46,13 +46,13 @@ export class AppModule {
                     payload = null
                 };
 
-                if(typeof payload != 'string' && payload) {
+                if (typeof payload != 'string' && payload) {
                     const rooms = await appDataSoure.manager.getRepository(Room)
                         .createQueryBuilder('room')
                         .innerJoin('room.users', 'u')
-                        .where('"u"."id" = :id', {id: payload.userId})
+                        .where('"u"."id" = :id', { id: payload.userId })
                         .getMany();
-                    
+
                     const roomsIds = rooms.map(room => `${room.id}`);
                     req.socketIo?.join(roomsIds);
                 }
