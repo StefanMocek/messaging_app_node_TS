@@ -36,7 +36,7 @@ export const roomResolvers: Resolvers = {
             };
 
             const participants = await userService.findByIds([
-                input.reciver, 
+                input.reciver,
                 context.currentUser.userId
             ])
 
@@ -48,7 +48,7 @@ export const roomResolvers: Resolvers = {
     },
 
     Query: {
-        async getRooms(parent, {}, context) {
+        async getRooms(parent, { }, context) {
             if (!context.authorized) {
                 throw new GraphQLError(
                     'unauthorized',
